@@ -1,0 +1,258 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  id: Int!
+  name: String!
+}
+
+input ChangePasswordInput {
+  currentPassword: String!
+  newPassword: String!
+}
+
+type Company {
+  address: String!
+  createdAt: DateTime!
+  eemployees: [User!]
+  id: Int!
+  name: String!
+  updatedAt: DateTime!
+}
+
+input CreateCategoryInput {
+  name: String!
+}
+
+input CreateCompanyInput {
+  address: String!
+  name: String!
+}
+
+input CreateOrderDetailInput {
+  productId: Float!
+  quantity: Float!
+}
+
+input CreateOrderInput {
+  orderDetails: [CreateOrderDetailInput!]!
+  sellerId: Float!
+  status: String!
+  totalQuantity: Float!
+}
+
+input CreateProductInput {
+  categoryId: Int!
+  name: String!
+  price: Float!
+}
+
+input CreateSaleDetailInput {
+  amount: Float!
+  price: Float!
+  productId: Float!
+  quantity: Float!
+}
+
+input CreateSaleInput {
+  grossAmount: Float!
+  net: Float!
+  saleDetail: [CreateSaleDetailInput!]!
+  sellerId: Float!
+  status: String!
+  vat: Float!
+}
+
+input CreateShopeProductInput {
+  productId: Int!
+  quantity: Float!
+  storeId: Int!
+  userId: Int!
+}
+
+input CreateUserInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  username: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginInput {
+  password: String!
+  username: String!
+}
+
+type Mutation {
+  changePassword(changePasswordInput: ChangePasswordInput!, userId: Float!): User!
+  createCategory(data: CreateCategoryInput!): Category!
+  createCompany(input: CreateCompanyInput!): Company!
+  createOrder(input: CreateOrderInput!): order!
+  createProduct(input: CreateProductInput!): Product!
+  createSale(input: CreateSaleInput!): sale!
+  createShopeProduct(input: CreateShopeProductInput!): shopeProduct!
+  createUser(input: CreateUserInput!): User!
+  deleteCategory(id: Int!): Category!
+  deleteCompany: Company!
+  deleteProduct(id: Int!): Product!
+  deleteShopeProduct: shopeProduct!
+  deleteUser(id: Int!): User!
+  forgotPassword(email: String!): Boolean!
+  login(input: LoginInput!): String!
+  sendNotification(message: String!, recipientId: Float!, soundUrl: String!): Boolean!
+  updateCategory(id: Int!): Category!
+  updateCompany: String!
+  updateProduct(id: Int!, input: UpdateProductInput!): Product!
+  updateProductPrice(id: Int!, input: UpdateProductPriceInput!): Product!
+  updateShopeProduct: shopeProduct!
+  updateStore(input: [UpdateStoreInput!]!): [store!]!
+  updateStoreQuantity(id: Int!, input: UpdateQuantityInput!): store!
+}
+
+type Notification {
+  message: String!
+  recipientId: Float!
+  soundUrl: String!
+}
+
+type OrderDetail {
+  id: Float!
+  orderId: Float!
+  product: Product!
+  productId: Float!
+  quantity: Float!
+}
+
+type Product {
+  category: Category!
+  categoryId: ID!
+  createdAt: DateTime!
+  id: Int!
+  name: String!
+  price: Float!
+  updatedAt: DateTime!
+}
+
+input ProductInput {
+  productId: Int!
+  quantity: Int!
+}
+
+type Query {
+  categories: [Category!]!
+  category(id: Int!): Category!
+  companies: [Company!]!
+  company(id: Int!): Company!
+  countOrder: Float!
+  countProducts: Float!
+  countStoreProducts: Float!
+  countUsers: Int!
+  me: User!
+  order(id: Float!): order!
+  orderDetail(id: Int!): OrderDetail!
+  orderDetails(orderId: Int!): [OrderDetail!]!
+  orders: [order!]!
+  product(id: Int!): Product!
+  products: [Product!]!
+  sale(id: Float!): sale!
+  saleDetailById: [saleDetail!]!
+  saleDetails: [saleDetail!]!
+  saleTotalProduct: Float!
+  sales: [sale!]!
+  shopeProduct(id: Int!): String!
+  shopeProducts: [shopeProduct!]!
+  store(id: Int!): store!
+  stores: [store!]!
+  totalSale: Float!
+  user(id: Int!): User
+  users: [User!]!
+}
+
+type Subscription {
+  countUpdated: Int!
+  notification: Notification!
+}
+
+input UpdateProductInput {
+  categoryId: Int!
+  name: String!
+  price: Float!
+}
+
+input UpdateProductPriceInput {
+  price: Float!
+}
+
+input UpdateQuantityInput {
+  quantity: Int!
+}
+
+input UpdateStoreInput {
+  orderId: Int!
+  products: [ProductInput!]!
+}
+
+type User {
+  createdAt: DateTime!
+  email: String!
+  firstName: String!
+  id: Int!
+  lastName: String!
+  password: String!
+  role: String!
+  status: String!
+  updatedAt: DateTime!
+  username: String!
+}
+
+type order {
+  createdAt: DateTime!
+  id: Int!
+  orderDetails: [OrderDetail!]!
+  seller: [User!]!
+  sellerId: Float!
+  status: String!
+  totalQuantity: Float!
+}
+
+type sale {
+  createdAt: DateTime!
+  grossAmount: Float!
+  id: Float!
+  net: Float!
+  saleDetail: [saleDetail!]!
+  seller: [User!]!
+  sellerId: Float!
+  status: String!
+  vat: Float!
+}
+
+type saleDetail {
+  amount: Float!
+  createdAt: DateTime!
+  id: Float!
+  price: Float!
+  product: Product!
+  productId: Float!
+  quantity: Float!
+  saleId: Int!
+  seller: User!
+}
+
+type shopeProduct {
+  id: Float!
+  product: Product!
+  quantity: Float!
+}
+
+type store {
+  id: Float!
+  product: Product!
+  quantity: Int!
+}

@@ -1,0 +1,173 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// schema.prisma
+
+model Product {
+  id        Int       @id @default(autoincrement())
+  name      String
+  price     Float
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  purchases Purchase[]
+  description String
+  image String
+  code String
+  shopeProduct     ShopeProduct[]
+  store     Store[]
+  category   Category   @relation(fields: [categoryId], references: [id])
+  categoryId Int 
+  orders OrderDetail[]
+  sales SaleDetail[]
+}
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
+}
+model Purchase {
+  id           Int       @id @default(autoincrement())
+  quantity     Int
+  purchaseDate DateTime  @default(now())
+  product      Product   @relation(fields: [productId], references: [id])
+  productId    Int
+  description String
+ 
+}
+
+model ShopeProduct {
+  id         Int       @id @default(autoincrement())
+
+  product    Product   @relation(fields: [productId], references: [id])
+  productId  Int
+  
+  user       User      @relation(fields: [userId], references: [id])
+  userId     Int
+
+  quantity   Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Store {
+  id        Int      @id @default(autoincrement())
+
+
+  productId  Int
+  product    Product   @relation(fields: [productId], references: [id])
+
+  user       User      @relation(fields: [userId], references: [id])
+  userId     Int
+
+  quantity Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String     @unique
+  firstName  String
+  lastName   String
+  phoneNumber String
+  address String
+  email      String     @unique
+  password   String
+  role       RoleEnum   @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  roleId    Int?
+  shopeProduct     ShopeProduct[]
+  store     Store[]
+  user       Company      @relation(fields: [companyId], references: [id])
+  companyId     Int
+  orders Order[]
+  sales Sale[]
+  forgotPassword forgotPassword[]
+  status Status @default(pending)
+}
+model forgotPassword {
+  id Int       @id @default(autoincrement())
+  userId Int
+  token String[]
+  user        User            @relation(fields: [userId], references: [id])
+}
+model Company {
+  id        Int       @id @default(autoincrement())
+  name      String
+  address   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  employees User[]
+}
+model OrderDetail {
+  id         Int      @id @default(autoincrement())
+  orderId    Int
+  quantity   Int
+  productId  Int
+  createdAt  DateTime @default(now())
+  order      Order    @relation(fields: [orderId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+  updatedAt DateTime  @updatedAt
+}
+model Order {
+  id            Int               @id @default(autoincrement())
+  sellerId      Int
+  totalQuantity Int
+  status        String
+  createdAt     DateTime          @default(now())
+  seller        User            @relation(fields: [sellerId], references: [id])
+  orderDetails  OrderDetail[]
+  updatedAt DateTime  @updatedAt
+}
+model SaleDetail {
+  id         Int      @id @default(autoincrement())
+  saleId     Int
+  quantity   Int
+  productId  Int
+  price      Float
+  amount     Float
+  createdAt  DateTime @default(now())
+  order      Sale    @relation(fields: [saleId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+  updatedAt DateTime  @updatedAt
+}
+model Sale {
+  id            Int               @id @default(autoincrement())
+  grossAmount   Float
+  vat           Float
+  net           Float
+  sellerId      Int
+  seller        User            @relation(fields: [sellerId], references: [id])
+  saleDetail    SaleDetail[]
+  status        String
+  createdAt     DateTime          @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+enum RoleEnum {
+  USER
+  ADMIN
+  STORE
+  SELLER
+
+}
+enum Status {
+  pending
+  active
+  approved
+  disabled
+}

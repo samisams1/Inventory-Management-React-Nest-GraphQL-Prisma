@@ -1,0 +1,1 @@
+{"version":3,"file":"company.module.js","sourceRoot":"","sources":["../../src/company/company.module.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAAwC;AACxC,uDAAmD;AACnD,yDAAqD;AAM9C,IAAM,aAAa,GAAnB,MAAM,aAAa;CAAG,CAAA;AAAhB,sCAAa;wBAAb,aAAa;IAJzB,IAAA,eAAM,EAAC;QACN,SAAS,EAAE,CAAC,gCAAc,EAAE,kCAAe,CAAC;QAC5C,OAAO,EAAC,CAAC,gCAAc,CAAC;KACzB,CAAC;GACW,aAAa,CAAG"}

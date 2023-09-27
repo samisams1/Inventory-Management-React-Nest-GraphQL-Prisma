@@ -1,0 +1,103 @@
+To save a profile image attribute in the user table using GraphQL and Prisma, you can follow these steps:
+
+Update your Prisma Schema: Open your Prisma schema file (schema.prisma) and add a new field for the profile image in the User model. Here's an example:
+prisma
+Copy
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  profileImage String?
+}
+In this example, we added a new field called profileImage of type String? to the User model. The ? indicates that this field is optional.
+
+Generate Prisma Client: After updating the Prisma schema, regenerate the Prisma client by running the following command in your terminal:
+bash
+Copy
+npx prisma generate
+This command will generate the Prisma client based on your updated schema.
+
+Update GraphQL Schema and Resolvers: In your GraphQL schema and resolvers, update the User type and resolver to include the profileImage field. Here's an example:
+graphql
+Copy
+type User {
+  id: Int!
+  username: String!
+  email: String!
+  password: String!
+  profileImage: String
+}
+
+type Mutation {
+  createUser(username: String!, email: String!, password: String!, profileImage: Upload): User!
+}
+In this example, we added the profileImage field to the User type in the GraphQL schema. We also updated the createUser mutation to accept an optional profileImage argument of type Upload.
+
+Update User Resolver: In your user resolver, update the createUser mutation resolver to handle the profileImage field. Here's an example:
+typescript
+Copy
+import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { GraphQLUpload, FileUpload } from 'graphql-upload';
+import { PrismaService } from 'path/to/prisma.service';
+
+@Resolver()
+export class UserResolver {
+  constructor(private prisma: PrismaService) {}
+
+  @Mutation(() => User)
+  async createUser(
+    @Args('username') username: string,
+    @Args('email') email: string,
+    @Args('password') password: string,
+    @Args({ name: 'profileImage', type: () => GraphQLUpload, nullable: true })
+    profileImage: FileUpload,
+  ): Promise<User> {
+    const user = await this.prisma.user.create({
+      data: {
+        username,
+        email,
+        password,
+        profileImage: profileImage ? await this.saveProfileImage(profileImage) : null,
+      },
+    });
+
+    return user;
+  }
+
+  async saveProfileImage(file: FileUpload): Promise<string> {
+    // Implement logic to save the profile image file
+    // You can use libraries like `fs` or `cloud storage providers` to handle image storage
+
+    // Example logic for saving to the local file system
+    const { createReadStream, filename } = await file;
+    const path = `path/to/save/${filename}`;
+    const stream = createReadStream();
+    // Write stream to desired storage location
+
+    return path; // Return the path or storage identifier for the profile image
+  }
+}
+In this example, the createUser mutation resolver now accepts an optional profileImage argument of type GraphQLUpload. Inside the resolver, we check if a profileImage is provided and call the saveProfileImage function to handle the file storage logic. The saveProfileImage function is responsible for saving the profile image file and returning the path or storage identifier.
+
+Test the Mutation: Start your Nest.js server and use a GraphQL client (such as GraphQL Playground or Apollo Client) to test the createUser mutation. Here's an example mutation with the profileImage field:
+graphql
+Copy
+mutation ($profileImage: Upload) {
+  createUser(username: "john", email: "john@example.com", password: "password123", profileImage: $profileImage) {
+    id
+    username
+    email
+    profileImage
+  }
+}
+Ensure that you set the profileImage variable as a valid file in the client or specify it in the "HTTP HEADERS" section of GraphQL Playground:
+
+json
+Copy
+{
+  "profileImage": null
+}
+Replace null with a valid file path on your local machine.
+
+With these steps, you should be able to save the profile image attribute in the user table using GraphQL and Prisma. Adjust the file storage logic in the resolver's saveProfileImage function according to your requirements, such as storing the file locally or integrating with cloud storage providers.
