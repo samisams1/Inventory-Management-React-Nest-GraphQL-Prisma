@@ -1,0 +1,49 @@
+.bill-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .bill-heading {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .address{
+    text-align: center;
+  }
+  .seller-info {
+    margin-bottom: 20px;
+  }
+  
+  .seller-label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .bill-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  .bill-summary {
+    text-align: center;
+  }
+  
+  .bill-table th,
+  .bill-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .thank-you-message {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+  }

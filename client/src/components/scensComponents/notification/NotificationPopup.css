@@ -1,0 +1,9 @@
+.notification-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 50px;
+    background-color: #3ae42a;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }

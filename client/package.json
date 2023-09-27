@@ -1,0 +1,81 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.7.17",
+    "@apollo/link-context": "^2.0.0-beta.3",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@heroicons/react": "^2.0.18",
+    "@iconify/react": "^4.1.1",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/icons-material": "^5.14.0",
+    "@mui/material": "^5.14.0",
+    "@mui/styles": "^5.14.4",
+    "@mui/x-data-grid": "^6.10.0",
+    "@nivo/bar": "^0.46.0",
+    "@nivo/core": "^0.83.0",
+    "@nivo/geo": "^0.83.0",
+    "@nivo/line": "^0.46.0",
+    "@nivo/pie": "^0.46.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.38",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@types/react-router-dom": "^5.3.3",
+    "apollo-link-context": "^1.0.20",
+    "formik": "^2.4.2",
+    "i": "^0.3.7",
+    "install": "^0.13.0",
+    "mui-datatables": "^4.3.0",
+    "next": "^13.4.19",
+    "npm": "^9.8.1",
+    "react": "^18.2.0",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.46.1",
+    "react-pro-sidebar": "^0.4.1",
+    "react-router-dom": "^6.15.0",
+    "react-scripts": "^2.1.8",
+    "react-toastify": "^6.2.0",
+    "subscriptions-transport-ws": "^0.11.0",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4",
+    "yup": "^1.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@types/mui-datatables": "^4.3.5"
+  }
+}

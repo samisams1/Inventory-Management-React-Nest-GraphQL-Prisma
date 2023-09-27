@@ -1,0 +1,112 @@
+import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
+import { Box, Container, Grid } from '@mui/material';
+import PageHeader from '../../components/PageHeader';
+import { PeopleOutlineTwoTone } from '@material-ui/icons';
+import OrderList from '../../components/scensComponents/order/OrderList';
+import ReplenishmentForm from '../../components/scensComponents/Replenishment/ReplenishmentForm';
+import { gql, useMutation } from '@apollo/client';
+import { STORE_QUERY } from '../../graphql/Store';
+import { CREATE_ORDER_MUTATION } from '../../graphql/Order';
+import NotificationPopup from '../../components/scensComponents/notification/NotificationPopup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const Request = () => {
+  const [createOrder, { data }] = useMutation(CREATE_ORDER_MUTATION, {
+    refetchQueries: [{ query: STORE_QUERY }],
+  });
+
+  const SEND_NOTIFICATION_MUTATION = gql`
+    mutation SendNotification($recipientId: Float!, $message: String!, $soundUrl: String!) {
+      sendNotification(recipientId: $recipientId, message: $message, soundUrl: $soundUrl)
+    }
+  `;
+
+  const [sendNotification] = useMutation(SEND_NOTIFICATION_MUTATION);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+
+  useEffect(() => {
+    // Initialize OneSignal
+    if (typeof window !== 'undefined') {
+      window.OneSignal = window.OneSignal || [];
+      window.OneSignal.push(() => {
+        window.OneSignal.init({
+          appId: 'YOUR_ONESIGNAL_APP_ID',
+        });
+
+        // Request permission to show web push notifications
+        window.OneSignal.push(() => {
+          window.OneSignal.registerForPushNotifications();
+        });
+
+        // Handle web push notification subscription changes
+        window.OneSignal.on('subscriptionChange', (isSubscribed) => {
+          if (isSubscribed) {
+            console.log('User subscribed to web push notifications');
+            // You can send the subscription details to your server for storing
+          } else {
+            console.log('User unsubscribed from web push notifications');
+            // You can update the subscription status on your server
+          }
+        });
+      });
+    }
+  }, []);
+
+  const handleSendNotification = (): void => {
+    const recipientId = 4; // Replace with the recipient's ID
+
+    sendNotification({
+      variables: {
+        recipientId,
+        message: 'hello',
+        soundUrl: 'https://example.com/notification_sound.mp3',
+      },
+    })
+      .then((response) => {
+        // Handle the response here if needed
+        console.log(response.data.sendNotification); // or update state accordingly
+
+        // Check if the recipient ID matches the current user ID
+        if (recipientId === 4) {
+          // Check if the browser supports the Notification API and permission is granted
+          if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
+            // Show the desktop notification
+            const notification = new Notification('Notification Message', {
+              body: 'Notification Body',
+              icon: 'notification-icon.png', // Replace with the path to your notification icon
+            });
+          } else {
+            // Fallback to React-Toastify if Notification API is not supported or permission is not granted
+            toast.success('Notification Message', {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 10000, // Close the notification after 10 seconds
+              hideProgressBar: true, // Hide the progress bar
+              closeOnClick: true, // Close the notification when clicked
+              draggable: true, // Allow dragging the notification
+            });
+          }
+        }
+      })
+      .catch((error: Error) => {
+        // Handle errors
+        console.error(error);
+      });
+  };
+
+  const handleSubmit = async (updatedProducts: Product[]) => {
+    // Convert the product values to numbers
+    let totalQuantityI apologize for the confusion, but as an AI text-based model, I don't have the capability to execute code or create live web push notifications. My previous response provided an example code snippet to demonstrate how you can integrate OneSignal for web push notifications in a React application.
+
+To implement web push notifications using OneSignal or any other web push notification service, you would typically follow these steps:
+
+1. Sign up for a web push notification service like OneSignal and create a new app for your website.
+2. Obtain the necessary API keys and configuration details from the service.
+3. Install the service's SDK or script in your web application. This usually involves adding a script tag to your HTML file.
+4. Initialize the service and handle the subscription process, typically in your JavaScript code. This involves requesting permission from the user and handling subscription change events.
+5. When you want to send a web push notification, make an API call to the service's backend with the necessary information such as the recipient ID, message, and optional payload.
+6. The service will handle sending the notification to the subscribed users' devices.
+
+I hope this clarifies the process of implementing web push notifications. If you have any further questions, feel free to ask.
