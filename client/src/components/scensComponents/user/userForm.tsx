@@ -94,7 +94,7 @@ console.log(values)
   name="role"
   label="Role"
   value={values.role}
-  onChange={handleInputChange}
+  onChange={handleInputChange}  
   options={[
     { id: '1', label: 'Admin', value: RoleEnum.ADMIN },
     { id: '2', label: 'Seller', value: RoleEnum.SELLER },
