@@ -113,6 +113,7 @@ type Mutation {
   updateShopeProduct: shopeProduct!
   updateStore(input: [UpdateStoreInput!]!): [store!]!
   updateStoreQuantity(id: Int!, input: UpdateQuantityInput!): store!
+  updateUser(id: Int!, input: UpdateUserInput!): User!
 }
 
 type Notification {
@@ -186,6 +187,16 @@ input UpdateQuantityInput {
 input UpdateStoreInput {
   orderId: Int!
   products: [ProductInput!]!
+}
+
+input UpdateUserInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  role: String
+  status: String
+  username: String
 }
 
 type User {

@@ -1,32 +1,52 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { InputType, Field, registerEnumType } from '@nestjs/graphql';
 
-@ObjectType()
-export class User {
-  @Field(() => Int)
-  id: number;
-
-  @Field()
-  username: string;
-
-  @Field()
-  email: string;
-
-  @Field()
-  password: string;
-
-  @Field()
-  name: string;
-  @Field()
-  companyId:number;
-
-
-  @Field()
-  createdAt: Date;
+@InputType()
+export class UpdateUserInput {
+  @Field({ nullable: true })
+  email?: string;
 
   @Field({ nullable: true })
-  resetToken: string;
+  username?: string;
+
+  @Field({ nullable: true })
+  firstName?: string;
+
+  @Field({ nullable: true })
+  role?: EnumRole;
+
+  @Field({ nullable: true })
+  status?: StatusEnum;
+
+  @Field({ nullable: true })
+  lastName?: string;
+
+  @Field({ nullable: true })
+  password?: string;
+}
+
+@InputType()
+export class ChangePasswordInput {
+  @Field()
+  currentPassword: string;
 
   @Field()
-  updatedAt: Date;
-
+  newPassword: string;
 }
+
+export enum EnumRole {
+  ADMIN = 'ADMIN',
+  USER = 'STORE',
+  GUEST = 'SELLER',
+}
+export enum StatusEnum {
+  active = 'active',
+  disabled = 'disabled',
+  pending = 'pending',
+}
+registerEnumType(EnumRole, {
+  name: 'EnumRole',
+  
+});
+registerEnumType(StatusEnum, {
+  name: 'StatusEnum',
+});

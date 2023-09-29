@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { BlockList } from 'net';
 import { execute } from 'graphql';
 import { notContains } from 'class-validator';
+import { UpdateUserInput } from './dto/update-user.input';
 @Injectable()
 export class UsersService {
   private prisma: PrismaClient
@@ -50,8 +51,8 @@ export class UsersService {
   }
     
   
-  async update(id: number, updateStoreDto: CreateUserInput):Promise<User> {
-    const { firstName,lastName } = updateStoreDto;
+  async update(id: number, updateStoreDto: UpdateUserInput):Promise<User> {
+    const { firstName,lastName,username,email,role,status } = updateStoreDto;
 
     return this.prisma.user.update({
       where: {
@@ -60,7 +61,10 @@ export class UsersService {
       data: {
         firstName,
         lastName,
-        
+        username,
+        email,
+        role,
+        status
       },
     });
   }

@@ -2,6 +2,7 @@ import gql from "graphql-tag"
 export const USER_QUERY = gql`
 query{
   users{
+    id
     username
     email
     firstName
@@ -51,6 +52,17 @@ mutation ($firstName: String!, $lastName: String!, $username: String!, $email: S
     firstName
   }
 }`
+
+ export const UPDATE_USER_MUTATION = gql`
+ mutation UpdateUser($id: Int!, $input: UpdateUserInput!) {
+  updateUser(id: $id, input: $input) {
+    firstName
+    lastName
+    role
+  }
+}
+`;
+
 export const COUNT_USER_QUERY = gql`
 query{
   countUsers

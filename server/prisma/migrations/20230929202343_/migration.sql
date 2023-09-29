@@ -77,6 +77,7 @@ CREATE TABLE "User" (
     "role" "RoleEnum" NOT NULL DEFAULT 'USER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "roleId" INTEGER,
     "companyId" INTEGER NOT NULL,
     "status" "Status" NOT NULL DEFAULT 'pending',
 

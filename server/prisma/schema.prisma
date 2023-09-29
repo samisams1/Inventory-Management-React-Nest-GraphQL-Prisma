@@ -83,10 +83,10 @@ model User {
   firstName  String
   lastName   String
   phoneNumber String
-  address String
+  address String     
   email      String     @unique
   password   String
-  role       RoleEnum   @default(USER)
+  role       RoleEnum   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   roleId    Int?
@@ -159,7 +159,6 @@ model Sale {
 }
 
 enum RoleEnum {
-  USER
   ADMIN
   STORE
   SELLER

@@ -8,7 +8,6 @@ import Button from '../../Button';
 import { USER_QUERY } from '../../../graphql/Users';
 import Controls from '../../Controls';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import CloseIcon from '@material-ui/icons/Close';
 import { UserEditForm } from './UserEdit';
 
 export const UserList = ({title,roleId}:any) => {
@@ -68,14 +67,14 @@ export const UserList = ({title,roleId}:any) => {
             customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
               return (
                 <Stack direction="row" spacing={1}>
-                  {value === "active" ? (
-                    <Chip label={value} color="secondary" />
-                  ) : value === "pending" ? (
-                    <Chip label={value} color="primary" />
-                  ) : (
-                    <Chip label={value} color="secondary" />
-                  )}
-                </Stack>
+                {value === "active" ? (
+                  <Chip label={value} color="success" />
+                ) : value === "pending" ? (
+                  <Chip label={value} color="info" />
+                ) : (
+                  <Chip label={value} color="error" />
+                )}
+              </Stack>
               );
             }
           },
@@ -135,11 +134,11 @@ export const UserList = ({title,roleId}:any) => {
    </Grid>
   </Popup>
   <Popup
-                    title="Patient Edit Form"
+                    title="Edit User Form"
                     openPopup={openPopup}
                     setOpenPopup={setOpenPopup}
                 >
-     <UserEditForm id = {newData[1]} firstName= {newData[1]} lastName ={newData[2]} role={newData[6]} username={newData[1]} email= {newData[3]} status={newData[4]} />
+     <UserEditForm id = {newData[0]} firstName= {newData[1]} lastName ={newData[2]} role={newData[6]} username={newData[3]} email= {newData[4]} status={newData[5]} />
          </Popup>
         </Grid>
       )

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layoutes';
 import LogoOnlyLayout from './layoutes/LogoOnlyLayout';
-import {  Admin, Order, Product, Store } from './pages';
+import { Order, Product, Store, User } from './pages';
 import ForgotPassword from './pages/account/ForgotPassword';
 import { Category } from './pages/Category';
 import NotFoud from './pages/NotFound';
@@ -28,9 +28,9 @@ export default function RoutePage() {
               { path: '/order', element: <ProtectedRoute  element={<Order />} /> },
               { path: '/request', element: <ProtectedRoute element={<Request />} /> },
               { path: '/category', element: <ProtectedRoute element={<Category />} /> },
-              { path: '/user', element: <ProtectedRoute  element={<Admin />} /> },
               { path: '/shope', element: <ProtectedRoute  element={<ShopeProduct />} /> },
               { path: '/sale', element: <ProtectedRoute  element={<Sale />} /> },
+              { path: '/user', element: <ProtectedRoute  element={<User />} /> },
               { path: '/store', element: <ProtectedRoute  element={<Store />} /> },
               { path: '/sales', element: <ProtectedRoute element={<Sales />} /> },
               { path: '/profile', element: <ProtectedRoute  element={<Profile />} /> },

@@ -5,10 +5,10 @@ import Button from '../../Button'
 import Controls from '../../Controls'
 import { useMutation } from '@apollo/client'
 import { userInterface, } from '../../../interface/interfaces'
-import { CREATE_USER_MUTATION, USER_QUERY } from '../../../graphql/Users'
+import { UPDATE_USER_MUTATION, USER_QUERY } from '../../../graphql/Users'
 
 export const UserEditForm = (props:any) => {
-  const [createProfile] = useMutation(CREATE_USER_MUTATION, {
+  const [createProfile] = useMutation(UPDATE_USER_MUTATION, {
     refetchQueries: [{ query:USER_QUERY }],
   })
   const [successMessage,setSuccessMessage]= useState('');
@@ -21,8 +21,9 @@ export const UserEditForm = (props:any) => {
     SELLER: 'SELLER',
   }
   const StatusEnum = {
-    acitive: 'acitive',
-    deactive: 'deactive',
+    active: 'active',
+    disabled: 'disabled',
+    pending:'pending',
   }
   const initialFValues: userInterface = {
     firstName:props.firstName,
@@ -41,27 +42,27 @@ export const UserEditForm = (props:any) => {
     if ('role' in fieldValues) temp.role = fieldValues.role ? '' : 'This field is required.';
     if ('email' in fieldValues) temp.email = fieldValues.email ? '' : 'This field is required.';
     if ('username' in fieldValues) temp.username = fieldValues.username ? '' : 'This field is required.';
-    if ('password' in fieldValues) temp.password = fieldValues.password ? '' : 'This field is required.';
     if ('status' in fieldValues) temp.status = fieldValues.status ? '' : 'This field is required.';
 
     setErrors({
       ...temp
     });
-    //  setMessage('');
     return fieldValues === values ? Object.values(temp).every(x => x === '') : false;
 };
 
   const { values, errors, setErrors, handleInputChange, resetForm }:any = useForm(initialFValues, true, validate);
 console.log(values)
-console.log("eeeeeeeeeeeeeeeeeeeeeeeeee")
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validate()) {
       createProfile({
-        variables: values,
+        variables: {
+          id: props.id, // Specify the user ID
+          input: values,
+        },
       })
         .then(() => {
-          setSuccessMessage('User created successfully!');
+          setSuccessMessage('User Updated Successfully!');
           resetForm();
           setTimeout(() => {
             setSuccessMessage('');
@@ -103,9 +104,6 @@ console.log("eeeeeeeeeeeeeeeeeeeeeeeeee")
     { id: '2', label: 'Seller', value: RoleEnum.SELLER },
     { id: '3', label: 'Store', value:  RoleEnum.STORE },
   ]}
-
-
-
   error={errors.role}
 />
              <Controls.Input
@@ -122,25 +120,16 @@ console.log("eeeeeeeeeeeeeeeeeeeeeeeeee")
                 onChange={handleInputChange}
                 error={errors.email}
             />
-            <Controls.Input
-                name="password"
-                label="password"
-                value={values.password }
-                onChange={handleInputChange}
-                error={errors.password}
-            />
-             <Controls.Select
+            <Controls.Select
   name="status"
   label="Status"
   value={values.status}
   onChange={handleInputChange}
   options={[
-    { id: '1', label: 'Active', value: StatusEnum.acitive },
-    { id: '2', label: 'Deactive', value: StatusEnum.deactive },
+    { id: '1', label: 'Active', value: StatusEnum.active },
+    { id: '2', label: 'Disabled', value: StatusEnum.disabled },
+    { id: '2', label: 'Pending', value: StatusEnum.pending },
   ]}
-
-
-
   error={errors.status}
 />
        </Grid>

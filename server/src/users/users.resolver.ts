@@ -5,6 +5,7 @@ import { ChangePasswordInput, CreateUserInput } from './dto/create-user.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/gql-auth-guard';
 import { RolesGuard } from 'src/auth/guards/roles.gurd';
+import { UpdateUserInput } from './dto/update-user.input';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -27,7 +28,11 @@ export class UsersResolver {
     const user = await this.usersService.create(createUserDto);
     return user;
   }
-
+  @Mutation(() => User)
+  async updateUser(@Args('id', { type: () => Int }) id: number,@Args('input') input:UpdateUserInput): Promise<User | null> {
+    const user = await this.usersService.update(id,input);
+    return user;
+  }
   @Mutation(() => User)
   async deleteUser(@Args('id', { type: () => Int }) id: number): Promise<User> {
     const user = await this.usersService.delete(id);

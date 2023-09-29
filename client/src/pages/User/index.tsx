@@ -9,8 +9,7 @@ import PageHeader from '../../components/PageHeader';
 import Controls from '../../components/Controls';
 import { UserList } from '../../components/scensComponents/user/userTable';
 import { UserForm } from '../../components/scensComponents/user/userForm';
-import Header from '../../Header';
-import { UserContext,CurrentUser } from '../../components/auth/UserContext';
+import { UserContext } from '../../components/auth/UserContext';
 import Spinner from '../../components/Spinner';
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -25,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         right: '10px'
     }
 }))
-export const Admin = () => {
+export const User = () => {
     const [openPopup, setOpenPopup] = useState(false)
     const classes = useStyles();
     const { currentUser } = useContext(UserContext);
@@ -42,16 +41,7 @@ export const Admin = () => {
             />
             <Paper className={classes.pageContent}>
                <Toolbar>
-                    <Controls.Input
-                        label="Search Employees"
-                        className={classes.searchInput}
-                        InputProps={{
-                            startAdornment: (<InputAdornment position="start">
-                                <Search />
-                            </InputAdornment>)
-                        }}
-                      //  onChange={handleSearch}
-                    />
+
                     <div  className={classes.newButton}>
                     <Controls.Button
                         text="Add New"
@@ -64,7 +54,7 @@ export const Admin = () => {
                 <UserList title={"Admin"} roleId = {1}/>
             </Paper>
             <Popup
-                title="Admin Form"
+                title="User Form"
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >
