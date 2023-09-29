@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Args, Int } from '@nestjs/graphql';
-import { Prisma, PrismaClient, Product } from '@prisma/client';
+import { Prisma, PrismaClient, Product, } from '@prisma/client';
 import { CreateProductInput } from './Dto/product-create-input';
 import { UpdateProductInput, UpdateProductPriceInput } from './Dto/product-update-input';
+import { product } from './product.entity';
 
 
 @Injectable()
@@ -12,7 +13,7 @@ export class ProductService {
     constructor(){
         this.prisma = new PrismaClient();
     }
-    async product(@Args('id') id:number):Promise<Product | null>{
+    async product(@Args('id') id:number):Promise<product | null>{
         return this.prisma.product.findUnique({
           where:{id},
           include:{
@@ -26,47 +27,78 @@ export class ProductService {
           }
         });
     }
-    async createProduct(createProductDto: CreateProductInput) {
-      const { name, price, categoryId } = createProductDto;
-    try{ 
-      return this.prisma.$transaction(async (prisma) => {
-        const product = await prisma.product.create({
+    async createProduct(data: CreateProductInput): Promise<Product | null> {
+      const { name, price, categoryId } = data;
+    
+      try {
+        const product = await this.prisma.product.create({
           data: {
             name,
             price,
             categoryId,
             description: "yto",
             code: "1452ddd",
-            image:'product'
+            image: 'product'
+          },
+        });
+        const shopeProduct = await this.prisma.shopeProduct.create({
+          data: {
+            quantity: 0,
+            productId: product.id,
+            userId: 1
+          }
+        });
+        const store = await this.prisma.store.create({
+          data: {
+            quantity: 0,
+            productId: product.id,
+            userId: 1
+          }
+        });
+        return product;
+      } catch (error) {
+        console.error('Error creating product:', error);
+        return null;
+      }
+    }
+   /* async createProduct(createProductDto: CreateProductInput): Promise<{ product: product } | null> {
+      const { name, price, categoryId } = createProductDto;
+      try {
+        const product = await this.prisma.product.create({
+          data: {
+            name,
+            price,
+            categoryId,
+            description: "yto",
+            code: "1452ddd",
+            image: 'product'
           },
         });
     
-        const shopeProduct = await prisma.shopeProduct.create({
-          data:{
-        quantity:0,
-        productId:product.id,
-        userId:1
+        const shopeProduct = await this.prisma.shopeProduct.create({
+          data: {
+            quantity: 0,
+            productId: product.id,
+            userId: 1
           }
         });
     
-        const store = await prisma.store.create({
-          data:{
-            quantity:0,
-            productId:product.id,
-            userId:1
-              }
+        const store = await this.prisma.store.create({
+          data: {
+            quantity: 0,
+            productId: product.id,
+            userId: 1
+          }
         });
     
-        return { 
-        product,
-        shopeProduct,
-        store } // Return the product record
-      });
-    }catch (error) {
-      console.error('Error creating product:', error);
-      throw new Error('Failed to create product');
-    }
-    }
+        return {
+          product,
+        };
+      } catch (error) {
+        console.error('Error creating product:', error);
+        throw new Error('Failed to create product');
+      }
+    }  */
       async update(id: number, updateProductDto: UpdateProductInput) {
         const { name, price, categoryId } = updateProductDto;
     
@@ -81,9 +113,9 @@ export class ProductService {
           },
         });
       }
-    async delete(@Args('id',{type:()=>Int}) id:number):Promise<Product | null>{
+    /*async delete(@Args('id',{type:()=>Int}) id:number):Promise<product | null>{
         return this.prisma.product.delete({where:{id}});
-    }
+    }*/
     async countProducts() {
       const countProducts = async () => {
         try {

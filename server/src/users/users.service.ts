@@ -26,7 +26,7 @@ export class UsersService {
   }
   async create(input: CreateUserInput): Promise<User> {
     try {
-      const { username, email, password, firstName, lastName, } = input;
+      const { username, email, password, firstName, lastName,role } = input;
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const user = await this.prisma.user.create({
@@ -39,6 +39,7 @@ export class UsersService {
           companyId: 1,
           phoneNumber: "+251973316377",
           address: "Addis Ababa",
+          role:role
         },
       });
 

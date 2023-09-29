@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { Product } from "src/product/product.entity";
+import { product } from "src/product/product.entity";
 
 @ObjectType()
 export class store {
@@ -10,6 +10,6 @@ id:number;
 quantity:number;
 
 @Field()
-product:Product
+product:product
 }
 

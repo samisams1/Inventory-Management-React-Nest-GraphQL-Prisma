@@ -15,7 +15,7 @@ export class Category {
     
 }*/
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Product } from '../product/product.entity';
+import { product } from '../product/product.entity';
 
 @ObjectType()
 export class Category {

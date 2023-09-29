@@ -1,5 +1,5 @@
 import { Field, ID, Int, ObjectType } from "@nestjs/graphql";
-import { Product } from "src/product/product.entity";
+import { product } from "src/product/product.entity";
 import { store } from "src/store/store.entity";
 import { User } from "src/users/entities/user.entity";
 
@@ -12,7 +12,7 @@ id:number;
 quantity:number;
 
 @Field()
-product:Product
+product:product
    /* @Field(()=>Int)
     id: number;
 

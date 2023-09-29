@@ -76,6 +76,7 @@ input CreateUserInput {
   firstName: String!
   lastName: String!
   password: String!
+  role: String!
   username: String!
 }
 
@@ -94,13 +95,12 @@ type Mutation {
   createCategory(data: CreateCategoryInput!): Category!
   createCompany(input: CreateCompanyInput!): Company!
   createOrder(input: CreateOrderInput!): order!
-  createProduct(input: CreateProductInput!): Product!
+  createProduct(input: CreateProductInput!): product!
   createSale(input: CreateSaleInput!): sale!
   createShopeProduct(input: CreateShopeProductInput!): shopeProduct!
   createUser(input: CreateUserInput!): User!
   deleteCategory(id: Int!): Category!
   deleteCompany: Company!
-  deleteProduct(id: Int!): Product!
   deleteShopeProduct: shopeProduct!
   deleteUser(id: Int!): User!
   forgotPassword(email: String!): Boolean!
@@ -108,8 +108,8 @@ type Mutation {
   sendNotification(message: String!, recipientId: Float!, soundUrl: String!): Boolean!
   updateCategory(id: Int!): Category!
   updateCompany: String!
-  updateProduct(id: Int!, input: UpdateProductInput!): Product!
-  updateProductPrice(id: Int!, input: UpdateProductPriceInput!): Product!
+  updateProduct(id: Int!, input: UpdateProductInput!): product!
+  updateProductPrice(id: Int!, input: UpdateProductPriceInput!): product!
   updateShopeProduct: shopeProduct!
   updateStore(input: [UpdateStoreInput!]!): [store!]!
   updateStoreQuantity(id: Int!, input: UpdateQuantityInput!): store!
@@ -124,19 +124,9 @@ type Notification {
 type OrderDetail {
   id: Float!
   orderId: Float!
-  product: Product!
+  product: product!
   productId: Float!
   quantity: Float!
-}
-
-type Product {
-  category: Category!
-  categoryId: ID!
-  createdAt: DateTime!
-  id: Int!
-  name: String!
-  price: Float!
-  updatedAt: DateTime!
 }
 
 input ProductInput {
@@ -158,8 +148,8 @@ type Query {
   orderDetail(id: Int!): OrderDetail!
   orderDetails(orderId: Int!): [OrderDetail!]!
   orders: [order!]!
-  product(id: Int!): Product!
-  products: [Product!]!
+  product(id: Int!): product!
+  products: [product!]!
   sale(id: Float!): sale!
   saleDetailById: [saleDetail!]!
   saleDetails: [saleDetail!]!
@@ -221,6 +211,19 @@ type order {
   totalQuantity: Float!
 }
 
+type product {
+  category: Category!
+  categoryId: Int!
+  code: String!
+  createdAt: DateTime!
+  description: String!
+  id: Int!
+  image: String!
+  name: String!
+  price: Float!
+  updatedAt: DateTime!
+}
+
 type sale {
   createdAt: DateTime!
   grossAmount: Float!
@@ -238,7 +241,7 @@ type saleDetail {
   createdAt: DateTime!
   id: Float!
   price: Float!
-  product: Product!
+  product: product!
   productId: Float!
   quantity: Float!
   saleId: Int!
@@ -247,12 +250,12 @@ type saleDetail {
 
 type shopeProduct {
   id: Float!
-  product: Product!
+  product: product!
   quantity: Float!
 }
 
 type store {
   id: Float!
-  product: Product!
+  product: product!
   quantity: Int!
 }

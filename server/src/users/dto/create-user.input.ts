@@ -16,6 +16,9 @@ export class CreateUserInput {
   firstName: string;
 
   @Field()
+  role:EnumRole
+
+  @Field()
   lastName: string;
 
   @Field()
@@ -31,3 +34,13 @@ export class ChangePasswordInput {
   @Field()
   newPassword: string;
 }
+
+export enum EnumRole {
+  ADMIN = 'ADMIN',
+  USER = 'STORE',
+  GUEST = 'SELLER',
+}
+
+registerEnumType(EnumRole, {
+  name: 'EnumRole',
+});

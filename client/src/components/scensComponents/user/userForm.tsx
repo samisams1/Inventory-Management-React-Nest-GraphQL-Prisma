@@ -20,10 +20,6 @@ export const UserForm = () => {
     STORE: 'STORE',
     SELLER: 'SELLER',
   }
-  const statusEnum = {
-    active: 'active',
-    disable: 'disable',
-  }
 
   const initialFValues: userInterface = {
     firstName:'',
@@ -87,21 +83,6 @@ console.log(values)
                 onChange={handleInputChange}
                 error={errors.firstName}
             />
-              <Controls.Select
-  name="status"
-  label="Status"
-  value={values.status}
-  onChange={handleInputChange}
-  options={[
-    { id: '1', label: 'Admin', value: RoleEnum.ADMIN },
-    { id: '2', label: 'Seller', value: RoleEnum.SELLER },
-    { id: '3', label: 'Store', value:  RoleEnum.STORE },
-  ]}
-
-
-
-  error={errors.role}
-/>
              <Controls.Input
                 name="lastName"
                 label="Last Name"

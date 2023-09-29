@@ -24,19 +24,33 @@ mutation CreateUser($firstName:String!,$lastName:String!,$email:String!,$phoneNu
   }
 }
 `*/
-export const CREATE_USER =gql`
+/*export const CREATE_USER =gql`
 mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     firstName
   }
 }`
-export const CREATE_USER_MUTATION = gql`
-  mutation CreateUser($firstName: String!, $lastName: String!, $username: String!, $email: String!, $password: String!) {
-    createUser(input: { firstName: $firstName, lastName: $lastName, username: $username, email: $email, password: $password}) {
+/*export const CREATE_USER_MUTATION = gql`
+  mutation CreateUser($firstName: String!, $lastName: String!, $username: String!, $email: String!, $password: String!,$role:String) {
+    createUser(input: { firstName: $firstName, lastName: $lastName, username: $username, email: $email, password: $password,role:$role}) {
       firstName
     }
   }
-`;
+`;*/
+
+export const CREATE_USER_MUTATION =gql`
+mutation ($firstName: String!, $lastName: String!, $username: String!, $email: String!, $password: String!, $role: String!) {
+  createUser(input: {
+    firstName: $firstName,
+    lastName: $lastName,
+    username: $username,
+    email: $email,
+    password: $password,
+    role: $role
+  }) {
+    firstName
+  }
+}`
 export const COUNT_USER_QUERY = gql`
 query{
   countUsers

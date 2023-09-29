@@ -1,5 +1,5 @@
 import { Field, ID, Int, ObjectType } from "@nestjs/graphql";
-import { Product } from "src/product/product.entity";
+import { product } from "src/product/product.entity";
 import { User } from "src/users/entities/user.entity";
 
 @ObjectType()
@@ -23,7 +23,7 @@ export class saleDetail {
   amount:number
 
   @Field()
-  product:Product
+  product:product
 
   @Field()
   seller:User

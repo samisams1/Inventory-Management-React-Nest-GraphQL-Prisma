@@ -1,5 +1,5 @@
 import { Field, InputType, Int } from "@nestjs/graphql";
-import { Product } from "src/product/product.entity";
+import { product } from "src/product/product.entity";
 
 @InputType()
 export class CreateOrderDetailInput{
