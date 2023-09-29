@@ -11,7 +11,7 @@ query{
   }
 }
 `
-export const CREATE_USER =gql`
+/*export const CREATE_USER =gql`
 mutation CreateUser($firstName:String!,$lastName:String!,$email:String!,$phoneNumber:String!,$password:String!,$roleId:Int!) {
   createUser(firstName:$firstName,lastName:$lastName,email:$email,phoneNumber:$phoneNumber,password:$password,role:$roleId) {
     id
@@ -23,7 +23,13 @@ mutation CreateUser($firstName:String!,$lastName:String!,$email:String!,$phoneNu
     roleId
   }
 }
-`
+`*/
+export const CREATE_USER =gql`
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    firstName
+  }
+}`
 export const CREATE_USER_MUTATION = gql`
   mutation CreateUser($firstName: String!, $lastName: String!, $username: String!, $email: String!, $password: String!) {
     createUser(input: { firstName: $firstName, lastName: $lastName, username: $username, email: $email, password: $password}) {

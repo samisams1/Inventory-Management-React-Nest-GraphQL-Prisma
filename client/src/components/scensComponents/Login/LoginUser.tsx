@@ -77,7 +77,7 @@ function Login() {
 
   const handleLogin = async (values: LoginValues) => {
     setLoading(true); // Start loading
-
+     console.log(values)
     try {
       const response = await createLogin({
         variables: values,
@@ -137,16 +137,17 @@ function Login() {
 
             <Button type="submit" variant="contained" color="primary" style={{ margin: "10px auto", width: "100%" }}>
               {loading ? (
-                <CircularProgress size={24} color="primary" /> // Show loading indicator
+                <CircularProgress size={24} color="primary" />
               ) : (
                 "Login"
               )}
-            </Button>
+                </Button>
           </Form>
         </Formik>
-        <div style={{ textAlign: "center", marginTop: "1rem" }}>
-          <Link to="/forgotPassword" className={classes.link}>
-            Forgot Password!
+        <div style={{ textAlign: "center", marginTop: "10px" }}>
+          Don't have an account?{" "}
+          <Link to="/signup" className={classes.link}>
+            Sign up
           </Link>
         </div>
       </div>

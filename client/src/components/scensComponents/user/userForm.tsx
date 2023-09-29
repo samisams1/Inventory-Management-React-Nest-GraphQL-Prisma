@@ -55,6 +55,8 @@ export const UserForm = () => {
 console.log(values)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(values)
+    console.log("kaba dbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
     if (validate()) {
       createProfile({
         variables: values,
