@@ -28,16 +28,16 @@ export class SaleResolver {
   return this.saleService.sale(id);
   }
   @Query(()=>[saleDetail])
-  async saleDetails():Promise<SaleDetail[]> {
+  async saleDetails() {
     return this.saleService.saleDetail();
   }
   @Query(()=>[saleDetail])
-  async saleDetailById():Promise<SaleDetail[]> {
-    return this.saleService.saleDetailBySellId();
+  async saleDetailById(@Args('id') id:number,):Promise<SaleDetail[]> {
+    return this.saleService.saleDetailBySellId(id);
   }
   @Query(()=>Number)
   async totalSale() {
-    return this.saleService.totalSales();
+    return this.saleService.sumTheGross();
   }
   @Query(()=>Number)
   async saleTotalProduct() {

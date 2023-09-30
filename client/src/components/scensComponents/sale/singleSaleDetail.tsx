@@ -7,7 +7,9 @@ import MUIDataTable from 'mui-datatables';
 import { SELL_DETAIL_BY_SELL_ID } from '../../../graphql/Sale';
 
 export const SingleSale = (props:any) => {
-  const {loading,error,data} = useQuery(SELL_DETAIL_BY_SELL_ID);
+  const {loading,error,data} = useQuery(SELL_DETAIL_BY_SELL_ID,{
+    variables:{id:props.id}
+  });
   if(loading) return <Spinner/>
   if (error) return <p>{error.message}</p>
 
@@ -37,7 +39,7 @@ const columns = [
         }
       },
     {
-      name: "Amount",
+      name: "Quantity",
       options: {
         filter: true,
         sort: false,
@@ -60,10 +62,7 @@ return (
               fontSize={15}
               fontWeight={900}
             >
-              Product sales by Date
-            </Typography>
-            <Typography variant="h4">
-              {"value"}
+              Product Sale Details
             </Typography>
           </Stack>
       </Stack>

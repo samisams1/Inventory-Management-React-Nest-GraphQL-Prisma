@@ -22,18 +22,9 @@ export const SaleList = (props:any) => {
   if (error) return <p>{error.message}</p>
 
   const saleData = data.sales.map((row:any)=>(
-    [row.id,row.seller,row.net + " Birr",row.vat + " Birr" ,row.grossAmount+ " Birr",row.status, row.status,row.createdAt
+    [row.id,row.sellerId,row.net + " Birr",row.vat + " Birr" ,row.grossAmount+ " Birr",row.status,(new Date(row.createdAt)).toLocaleString('en-US', { day: 'numeric', year: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', second: 'numeric' })
     ]
 ));
-const product = {
-  name: 'Product Name',
-  description: 'Product Description',
-  price: '$19.99',
-  quantity: 5,
-  amount: '$99.95',
-  createdAt: '2023-09-24',
-  imageUrl: 'https://example.com/product-image.jpg',
-};
 const columns = [
     {
       name: "#Id",
@@ -42,7 +33,7 @@ const columns = [
       }
     },
     {
-      name: "Seller Name",
+      name: "Seller Id",
       options: {
         filter: true,
       }

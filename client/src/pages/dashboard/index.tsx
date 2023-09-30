@@ -5,10 +5,15 @@ import { AdminDashboard } from './admin';
 import SaleDashboard from './sale';
 import StoreDashboard from './store';
 
+interface CurrentUser {
+  role: string;
+  // Other properties of the current user
+}
+
 const Dashboard = () => {
   const { currentUser } = useContext(UserContext);
 
-  if (!currentUser) {
+  if (currentUser === null) {
     return <Spinner />;
   }
 

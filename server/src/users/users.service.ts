@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, PrismaClient, User } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 import { MemcachedService } from '../memcached/memcached.service'
 import { ChangePasswordInput, CreateUserInput } from './dto/create-user.input';
+import fs from 'fs';
 
 import * as bcrypt from 'bcrypt';
-import { BlockList } from 'net';
-import { execute } from 'graphql';
-import { notContains } from 'class-validator';
 import { UpdateUserInput } from './dto/update-user.input';
 @Injectable()
 export class UsersService {
@@ -165,13 +163,13 @@ export class UsersService {
     
       return users();
     }
-   /* async uploadAvatar(file: FileU): Promise<string> {
+    async uploadAvatar(file: any): Promise<string> {
       const { createReadStream, filename } = await file;
       const stream = createReadStream();
-  
+    
       // Define the path where you want to save the uploaded file
       const savePath = `path/to/save/${filename}`;
-  
+    
       // Save the file to the specified path
       await new Promise((resolve, reject) => {
         const writeStream = fs.createWriteStream(savePath);
@@ -179,12 +177,12 @@ export class UsersService {
         writeStream.on('finish', resolve);
         writeStream.on('error', reject);
       });
-  
+    
       // Perform any additional processing if needed
-  
+    
       // Return the file path or any other relevant response
       return savePath;
-    } */
+    }
 
 }
 

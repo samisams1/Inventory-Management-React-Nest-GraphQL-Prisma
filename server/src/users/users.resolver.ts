@@ -7,6 +7,7 @@ import { GqlAuthGuard } from 'src/auth/gql-auth-guard';
 import { RolesGuard } from 'src/auth/guards/roles.gurd';
 import { UpdateUserInput } from './dto/update-user.input';
 
+
 @Resolver(() => User)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
@@ -57,11 +58,11 @@ export class UsersResolver {
   async forgotPassword(@Args('email') email: string): Promise<boolean> {
     return this.usersService.forgotPassword(email);
   }
- /* @Mutation()
+ /* @Mutation(() => String)
   async uploadAvatar(
-    @Args({ name: 'file', type: () => GraphqlUp })
+    @Args({ name: 'file', type: () => GraphQLUpload })
     file: FileUpload,
   ): Promise<string> {
-    return this.usersService.uploadAvatar(file); 
-  }*/
+    return this.usersService.uploadAvatar(file);
+  } */
 }

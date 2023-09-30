@@ -8,6 +8,7 @@ query{
     status
     grossAmount
     net
+    createdAt
     saleDetail{
       id
       product{
@@ -66,14 +67,16 @@ query{
 }`;
 
 export const SELL_DETAIL_BY_SELL_ID = gql`
-query{
-  saleDetailById{
+query SaleDetailById($id: Float!) {
+  saleDetailById(id: $id) {
     id
-    product{ name  }
+    product {
+      name
+    }
     saleId
     price
     quantity
-    amount 
+    amount
   }
 }
 `

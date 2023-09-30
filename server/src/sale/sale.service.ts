@@ -29,6 +29,7 @@ export class SaleService {
             saleDetail:{
                 include:{
                     product:true,
+                    
                 },
             }
          }
@@ -90,7 +91,7 @@ export class SaleService {
       
         return sale;
       }
-    async saleDetail():Promise<SaleDetail[]> {
+    async saleDetail() {
       const sales = await this.prisma.saleDetail.findMany({
        include:{
         product:true
@@ -99,9 +100,9 @@ export class SaleService {
   
       return sales;
     }
-    async saleDetailBySellId():Promise<SaleDetail[]> {
+    async saleDetailBySellId(id:number):Promise<SaleDetail[]> {
       const sales = await this.prisma.saleDetail.findMany({
-        where:{saleId:46},
+        where:{saleId:id},
        include:{
         product:true,
        }
@@ -135,11 +136,14 @@ export class SaleService {
           },
         });
     } */
-    async totalSales() {
-      const calculateTotalSales = async () => {
+    async sumTheGross() {
+      const sumGross = async () => {
         try {
-          const orders = await this.prisma.orderDetail.findMany();
-          const sum = orders.reduce((acc, order) => acc + order.quantity, 0);
+          const orders = await this.prisma.sale.findMany();
+          let sum = 0;
+          for (const order of orders) {
+            sum += order.grossAmount; 
+          }
           return sum;
         } catch (error) {
           // Handle any errors that occur during the calculation
@@ -147,7 +151,7 @@ export class SaleService {
         }
       };
     
-      return calculateTotalSales();
+      return sumGross();
     }
     async saleTotalProduct() {
       const calculateTotalSales = async () => {

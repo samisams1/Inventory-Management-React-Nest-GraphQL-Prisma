@@ -152,7 +152,7 @@ type Query {
   product(id: Int!): product!
   products: [product!]!
   sale(id: Float!): sale!
-  saleDetailById: [saleDetail!]!
+  saleDetailById(id: Float!): [saleDetail!]!
   saleDetails: [saleDetail!]!
   saleTotalProduct: Float!
   sales: [sale!]!

@@ -32,7 +32,7 @@ export const TotalSales = (props:any) => {
               Total Sales
             </Typography>
             <Typography variant="h4">
-            {data.totalSale + " "} Birr 
+            {data.totalSale.toLocaleString() + " "} Birr 
             </Typography>
           </Stack>
           <Avatar
