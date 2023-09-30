@@ -47,11 +47,8 @@ export class UsersService {
       throw error.message;
     }
   }
-    
-  
   async update(id: number, updateStoreDto: UpdateUserInput):Promise<User> {
     const { firstName,lastName,username,email,role,status } = updateStoreDto;
-
     return this.prisma.user.update({
       where: {
         id,
