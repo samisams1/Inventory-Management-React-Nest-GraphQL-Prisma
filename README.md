@@ -82,4 +82,3 @@ Contributions are welcome! If you have any suggestions or improvements for the p
 
 License
 This project is licensed under the MIT License.
-file:///home/samisams/Pictures/Screenshots/Screenshot%20from%202023-10-01%2013-09-04.png
