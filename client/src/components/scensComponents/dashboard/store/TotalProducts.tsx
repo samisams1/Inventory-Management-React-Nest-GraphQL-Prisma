@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
-import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
+import ShoppingCartIcon from '@heroicons/react/24/solid/ShoppingCartIcon';
 import { useQuery } from '@apollo/client';
 import { SALE_TOTAL_PRODUCT_QUERY } from '../../../../graphql/Sale';
 import Spinner from '../../../Spinner';
@@ -35,13 +35,13 @@ export const StoreProducts = (props:any) => {
           </Stack>
           <Avatar
             sx={{
-              backgroundColor: 'rgb(240, 68, 56)',
+              backgroundColor: '#3c44b1',
               height: 56,
               width: 56
             }}
           >
             <SvgIcon>
-              <UsersIcon />
+              <ShoppingCartIcon />
             </SvgIcon>
           </Avatar>
       </Stack>

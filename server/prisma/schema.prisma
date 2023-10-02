@@ -83,7 +83,7 @@ model User {
   firstName  String
   lastName   String
   phoneNumber String
-  address String     
+  address String      
   email      String     @unique
   password   String
   role       RoleEnum   

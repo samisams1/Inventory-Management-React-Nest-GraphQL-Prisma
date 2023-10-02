@@ -10,12 +10,12 @@ import { ShopeProduct } from './pages/Product/shope/shopeProduct';
 import { Profile } from './pages/Profile';
 import Request from "./pages/Request";
 import Sale from './pages/Sale';
-import { Report } from './pages/report/Report';
 import Login from './pages/Login';
 import Setting from './pages/setting';
 import ProtectedRoute from './components/auth/Sami';
 import { Sales } from './pages/Sale/Sales';
 import Dashboard from './pages/dashboard';
+import { Report } from './pages/report/Report';
 export default function RoutePage() {
 
     return useRoutes([

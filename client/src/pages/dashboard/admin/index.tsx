@@ -9,9 +9,6 @@ import { TotalOrders } from '../../../components/scensComponents/dashboard/Total
 import { TotalUser } from '../../../components/scensComponents/dashboard/totalUsers';
 import { TotalSales } from '../../../components/scensComponents/dashboard/TotalSales';
 
-
-const now = new Date();
-
 export const AdminDashboard = () => (
   <>
     <Head>

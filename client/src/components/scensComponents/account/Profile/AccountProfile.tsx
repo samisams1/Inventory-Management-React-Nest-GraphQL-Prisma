@@ -28,8 +28,26 @@ export const AccountProfile = () => {
     return <Spinner />;
   }
 
-  const { username,lastName,role }: CurrentUser = currentUser;
+  const { username, lastName, role }: CurrentUser = currentUser;
 
+  const handleUpload = (event:any) => {
+    const file = event.target.files[0];
+    // Perform the necessary upload logic here
+  };
+ /* const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const result = reader.result;
+      setPreviewImage(result);
+      // Perform the necessary upload logic here
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };*/
   return (
     <Card>
       <CardContent>
@@ -61,9 +79,16 @@ export const AccountProfile = () => {
       </CardContent>
       <Divider />
       <CardActions>
-        <Button fullWidth variant="text">
+        <Button fullWidth variant="text" component="label" htmlFor="upload-input">
           Upload picture
         </Button>
+        <input
+          accept="image/*"
+          style={{ display: 'none' }}
+          id="upload-input"
+          type="file"
+          onChange={handleUpload}
+        />
       </CardActions>
     </Card>
   );

@@ -91,9 +91,9 @@ console.log(values)
                 error={errors.lastName}
             />
        <Controls.Select
-  name="role"
+  name="role"   
   label="Role"
-  value={values.role}
+  value={values.role}    
   onChange={handleInputChange}  
   options={[
     { id: '1', label: 'Admin', value: RoleEnum.ADMIN },

@@ -6,9 +6,11 @@ import { productInterface } from '../../../interface/interfaces';
 
 interface Product {
   productId: string;
+  name:string;
   quantity: string;
   price: number;
   amount:number;
+
 }
 
 interface ReplenishmentFormProps {
@@ -16,7 +18,7 @@ interface ReplenishmentFormProps {
 }
 
 const SaleProductForm: React.FC<ReplenishmentFormProps> = ({ onSubmit }) => {
-  const [products, setProducts] = useState<Product[]>([{ productId: '', price: 0, quantity: '',amount:0 }]);
+  const [products, setProducts] = useState<Product[]>([{ name:'',productId: '', price: 0, quantity: '',amount:0 }]);
   const { loading, error, data } = useQuery(PRODUCT_QUERY);
 
   if (loading) return <p>Loading...</p>;
@@ -28,6 +30,7 @@ const SaleProductForm: React.FC<ReplenishmentFormProps> = ({ onSubmit }) => {
       const updatedProducts = [...products];
       updatedProducts[index].productId = value;
       updatedProducts[index].price = selectedProduct.price;
+      updatedProducts[index].name = selectedProduct,name
       setProducts(updatedProducts);
     }
   };
@@ -39,7 +42,7 @@ const SaleProductForm: React.FC<ReplenishmentFormProps> = ({ onSubmit }) => {
   };
 
   const handleAddProduct = () => {
-    setProducts([...products, { productId: '', price: 0, quantity: '',amount:0 }]);
+    setProducts([...products, {name:'', productId: '', price: 0, quantity: '',amount:0 }]);
   };
 
   const handleRemoveProduct = (index: number) => {
@@ -74,7 +77,7 @@ const SaleProductForm: React.FC<ReplenishmentFormProps> = ({ onSubmit }) => {
     onSubmit(products);
 
     // Clear form inputs
-    setProducts([{ productId: '', price: 0, quantity: '',amount:0 }]);
+    setProducts([{name:'', productId: '', price: 0, quantity: '',amount:0 }]);
   };
 
   return (

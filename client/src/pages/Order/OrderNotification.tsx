@@ -4,6 +4,7 @@ import { gql } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { UserContext } from '../../components/auth/UserContext';
 import Spinner from '../../components/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 const NOTIFICATION_SUBSCRIPTION = gql`
   subscription {
@@ -23,6 +24,7 @@ interface Notification {
 
 export const OrderNotification = () => {
   const {currentUser} = useContext(UserContext);
+  const navigate = useNavigate();
   if(!currentUser){
     return <Spinner/>
   }
@@ -60,6 +62,7 @@ export const OrderNotification = () => {
       const id = 1;
       notification.onclick = () => {
        // navigate(`/notificationDetail?id=${id}`);
+    //   navigate('/order')
       };
     } else {
       // Fallback to React-Toastify if Notification API is not supported or permission is not granted

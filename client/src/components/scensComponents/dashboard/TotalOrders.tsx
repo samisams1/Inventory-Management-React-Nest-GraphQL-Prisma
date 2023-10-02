@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
-import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
+import UsersIcon from '@heroicons/react/24/solid/ArrowUpIcon';
 import { useQuery } from '@apollo/client';
 import Spinner from '../../Spinner';
 import { COUNT_ORDER_QUERY } from '../../../graphql/Order';
@@ -35,7 +35,7 @@ export const TotalOrders = (props:any) => {
           </Stack>
           <Avatar
             sx={{
-              backgroundColor: '#3c44b1',
+              backgroundColor:'rgb(240, 68, 56)', 
               height: 56,
               width: 56
             }}

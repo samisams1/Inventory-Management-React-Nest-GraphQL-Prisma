@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
-import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
+import ShoppingCartIcon from '@heroicons/react/24/solid/ShoppingCartIcon';
+
 import { useQuery } from '@apollo/client';
 import { COUNT_PRODUCT_QUERY } from '../../../graphql/Product';
 import Spinner from '../../Spinner';
@@ -46,7 +47,7 @@ export const TotalProducts = (props:any) => {
             }}
           >
             <SvgIcon>
-              <UsersIcon />
+              <ShoppingCartIcon />
             </SvgIcon>
           </Avatar>
       </Stack>

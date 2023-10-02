@@ -1,29 +1,12 @@
 import * as React from 'react';
-import {useState,useEffect} from 'react';
+import {useState} from 'react';
 import {Box,Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
-import { io } from 'socket.io-client';
-import AuthService from '../../../api/auth/auth.service';
-import baseURL from '../../../api/url';
+
 
 export default function TodayTotalQueue() {
-  const currentUser = AuthService.getCurrentUser();
-   const token = currentUser.accessToken;
-   const socket = io.connect(baseURL,{transports: ['websocket', 'polling', 'flashsocket'],query:{
-    token:token
-  }});
+ 
     const [total_ticket,settotal_ticket]  =useState("")
 
-    useEffect(() => {
-        socket.on("totalDailyQueueAllUser", function(daily_all_user_queue) {
-            settotal_ticket(daily_all_user_queue);
-        });
-     //   console.log("samisams" + daily_all_user_queue);
-    });
-
-    
-useEffect(()=>{
-    socket.emit("totalDailyQueueAllUser");
-});
   return (
     <Card >
     <CardContent>

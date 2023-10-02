@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ArrowDownIcon from '@heroicons/react/24/solid/ArrowDownIcon';
-import ArrowUpIcon from '@heroicons/react/24/solid/ArrowUpIcon';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
-import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
+import UsersIcon from '@heroicons/react/24/solid/CurrencyDollarIcon';
 import Spinner from '../../Spinner';
 import { useQuery } from '@apollo/client';
 import { COUNT_SALE_QUERY } from '../../../graphql/Sale';

@@ -1,17 +1,14 @@
-import { Box, Container, Grid } from '@mui/material'
-import Head from 'next/head'
 import React from 'react';
+import Head from 'next/head';
+import { Box, Container, Unstable_Grid2 as Grid } from '@mui/material';
 import { StoreProducts } from '../../../components/scensComponents/dashboard/store/TotalProducts';
 import { TotalOrders } from '../../../components/scensComponents/dashboard/TotalOrders';
-import { TotalSales } from '../../../components/scensComponents/dashboard/TotalSales';
-import { SaleDetailList } from '../../../components/scensComponents/sale/SaleDetail';
-import { SaleList } from '../../../components/scensComponents/sale/SaleList';
-import { StoreList } from '../../../components/scensComponents/store';
 
-const StoreDashboard = () => {
-    return( 
-        <> 
-      <Head>
+
+
+export const StoreDashboard = () => (
+  <>
+    <Head>
       <title>
         Overview | Inventory
       </title>
@@ -34,9 +31,10 @@ const StoreDashboard = () => {
             lg={6}
           >
             <StoreProducts
-              difference={12}
-              positive
+              difference={16}
+              positive={false}
               sx={{ height: '100%' }}
+              value="1.6k"
             />
           </Grid>
           <Grid
@@ -45,20 +43,13 @@ const StoreDashboard = () => {
             lg={6}
           >
             <TotalOrders
-              difference={16}
-              positive={false}
               sx={{ height: '100%' }}
+              value="$15k"
             />
           </Grid>
          
         </Grid>
       </Container>
     </Box>
-  
-    </>
-    )
-}
-
-
-
-export default StoreDashboard
+  </>
+);

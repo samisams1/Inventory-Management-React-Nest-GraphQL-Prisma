@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { UserContext } from '../../components/auth/UserContext';
 import Spinner from '../../components/Spinner';
 import { AdminDashboard } from './admin';
-import SaleDashboard from './sale';
-import StoreDashboard from './store';
+import { SellerDashboard } from './sale';
+import { StoreDashboard } from './store';
 
 interface CurrentUser {
   role: string;
@@ -20,7 +20,7 @@ const Dashboard = () => {
   let dashboardComponent;
 
   if (currentUser.role === 'SELLER') {
-    dashboardComponent = <SaleDashboard />;
+    dashboardComponent = <SellerDashboard />;
   } else if (currentUser.role === 'STORE') {
     dashboardComponent = <StoreDashboard />;
   } else if (currentUser.role === 'ADMIN') {
