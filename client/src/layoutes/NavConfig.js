@@ -81,6 +81,11 @@ export const navConfig = [
     icon: getIcon('dashicons:store'),
   },
   {
+    title: 'Attachement',
+    path: 'attachement',
+    icon: getIcon('fluent-mdl2:review-request-solid'),
+  },
+  {
     title: 'User',
     path: 'user',
     icon: getIcon('fa:users'),

@@ -2,32 +2,22 @@ import * as React from 'react';
 import TabContext from '@material-ui/lab/TabContext'
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
-// /import MonthReportCharts from '../report/month/MonthCharts';
 import { Box, Tab } from '@mui/material';
-/*import MonthReprtByTable from '../report/month/MonthReportTable';
-import TodayReprtByTable from '../report/daily/TodayReprtTable';
-import YearReprtByTable from '../report/year/YearReportTable';
-import DailyReportChart from '../report/daily/dailyReportCharts';*/
-import YearReportCharts from '../report/year/YearReportChart';
-import { SaleList } from '../sale/SaleList';
 
-/*
-import DayReportTable from '../../components/Report/MonthReportTable'
-import DailyCharts from '../../components/Report/dailyReportCharts'
-import MonthlyCharts from '../../components/Report/MonthCharts'
-import MonthReportTable from '../../components/Report/MonthReportTable'
-import AnuualyReportTable from '../../components/Report/YearReportTable'
-import AnuualyCharts from '../../components/Report/YearReportChart'
-*/
+import TodayReprtByTable from '../report/daily/TodayReprtTable';
+import DailyReportChart from '../report/daily/dailyReportCharts';
+
+import MonthReportChart from '../report/month/MonthCharts';
+import MonthReprtByTable from '../report/month/MonthReportTable';
+
+import YearReprtByTable from '../report/year/YearReportTable';
+
 export default function LabTabs() {
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-
-
   return (
     <>
 
@@ -41,16 +31,16 @@ export default function LabTabs() {
           </TabList>
         </Box>
         <TabPanel value="1">
-        <YearReportCharts /> 
-          <YearReportCharts /> 
+        <TodayReprtByTable /> 
+          <DailyReportChart /> 
         </TabPanel>
-        <TabPanel value="2">
-          <YearReportCharts />           
-          <YearReportCharts />
+        <TabPanel value="2">YearReportCharts
+          <MonthReprtByTable />           
+          <MonthReportChart />
         </TabPanel>
         <TabPanel value="3">
-          <SaleList /> 
-           <YearReportCharts /> 
+          <YearReprtByTable /> 
+           <MonthReportChart /> 
         </TabPanel>
       </TabContext>
     </Box>

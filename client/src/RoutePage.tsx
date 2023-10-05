@@ -16,6 +16,8 @@ import ProtectedRoute from './components/auth/Sami';
 import { Sales } from './pages/Sale/Sales';
 import Dashboard from './pages/dashboard';
 import { Report } from './pages/report/Report';
+import { RequestHistory } from './pages/Request/RequestHistory';
+import { Purchase } from './pages/purchase';
 export default function RoutePage() {
 
     return useRoutes([
@@ -33,6 +35,8 @@ export default function RoutePage() {
               { path: '/user', element: <ProtectedRoute  element={<User />} /> },
               { path: '/store', element: <ProtectedRoute  element={<Store />} /> },
               { path: '/sales', element: <ProtectedRoute element={<Sales />} /> },
+              { path: '/requestHistory', element: <ProtectedRoute element={<RequestHistory />} /> },
+              { path: '/attachement', element: <ProtectedRoute element={<Purchase />} /> },
               { path: '/profile', element: <ProtectedRoute  element={<Profile />} /> },
               { path: '/report', element: <ProtectedRoute element={<Report />} /> },
               { path: '/setting', element: <ProtectedRoute  element={<Setting />} /> },

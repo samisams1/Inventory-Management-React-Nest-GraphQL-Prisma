@@ -130,7 +130,7 @@ return (
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >
-       <SingleSale id ={1}/>
+       <SingleSale id ={newData[0]}/>
      </Popup>
     </Card>
   );

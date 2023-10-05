@@ -50,6 +50,13 @@ mutation UpdateStore($input: [UpdateStoreInput!]!) {
   }
 }
 `;
+export const ACCEPT_STORE_PRODUCT_MUTATION = gql`
+mutation AcceptStoreProduct($input: [UpdateStoreInput!]!) {
+  acceptStoreProduct(input: $input) {
+    id
+  }
+}
+`;
 export const COUNT_STORE_PRODUCT_QUERY = gql`
 query{
   countStoreProducts

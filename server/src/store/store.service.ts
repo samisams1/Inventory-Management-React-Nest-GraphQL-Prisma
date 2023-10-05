@@ -34,7 +34,6 @@ export class StoreService {
         const product = await this.prisma.product.findUnique({
           where: { id: productId },
         });
-  
         // Check if the available quantity in the store is sufficient
         const store = await this.prisma.store.findUnique({
           where: { id: productId },
@@ -53,7 +52,6 @@ export class StoreService {
             where: { id: orderId },
             data: { status: "approved" },
           });
-  
           // Find the affected stores
           const affectedStores = await this.prisma.store.findMany({
             where: { productId: productId },
@@ -61,18 +59,16 @@ export class StoreService {
               product: true,
             },
           });
-  
           // Find the affected sales
-          const affectedSales = await this.prisma.shopeProduct.findMany({
+         /* const affectedSales = await this.prisma.shopeProduct.findMany({
             where: { productId: productId },
             include: {
               product: true,
             },
-          });
+          });*/
+        //  updatedStores.push(...affectedStores);
   
-          updatedStores.push(...affectedStores);
-  
-          for (const sale of affectedSales) {
+         /* for (const sale of affectedSales) {
             // Update the sale quantity
             const updatedSale = await this.prisma.shopeProduct.update({
               where: { id: sale.id },
@@ -81,7 +77,7 @@ export class StoreService {
   
             // Push the updated sale to the affectedStores array
             updatedStores.push(updatedSale);
-          }
+          }*/
         }
       }
     }

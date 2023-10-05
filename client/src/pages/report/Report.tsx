@@ -1,10 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import { Box, Container, Unstable_Grid2 as Grid } from '@mui/material';
-import { TotalProducts } from '../../components/scensComponents/dashboard/totalProducts';
-import { TotalOrders } from '../../components/scensComponents/dashboard/TotalOrders';
-import { TotalSales } from '../../components/scensComponents/dashboard/TotalSales';
 import LabTabs from '../../components/scensComponents/Tab/tabs';
+import { DailyTotalSales } from '../../components/scensComponents/report/daily/TodayTotalQueue';
+import { YearTotalSales } from '../../components/scensComponents/report/year/YearTotalSales';
+import { MonthTotalSales } from '../../components/scensComponents/report/month/MonthTotalSales';
 
 export const Report = () => (
   <>
@@ -30,7 +30,7 @@ export const Report = () => (
             sm={6}
             lg={3}
           >
-            <TotalProducts
+            <DailyTotalSales
               difference={12}
               positive
               sx={{ height: '100%' }}
@@ -42,7 +42,7 @@ export const Report = () => (
             sm={6}
             lg={3}
           >
-            <TotalProducts
+            <MonthTotalSales
               difference={16}
               positive={false}
               sx={{ height: '100%' }}
@@ -54,50 +54,17 @@ export const Report = () => (
             sm={6}
             lg={3}
           >
-            <TotalProducts
+            <YearTotalSales
               sx={{ height: '100%' }}
               value={75.5}
             />
           </Grid>
-          <Grid
-            xs={12}
-            sm={6}
-            lg={3}
-          >
-            <TotalOrders
-              sx={{ height: '100%' }}
-              value="$15k"
-            />
-          </Grid>
-          <Grid
-            xs={12}
-            sm={6}
-            lg={3}
-          >
-            <TotalSales
-              difference={12}
-              positive
-              sx={{ height: '100%' }}
-              value="$24k"
-            />
-          </Grid>
-          <Grid
-            xs={12}
-            sm={6}
-            lg={3}
-          >
-            <TotalProducts
-              difference={16}
-              positive={false}
-              sx={{ height: '100%' }}
-              value="1.6k"
-            />
-          </Grid>
+        
           <Grid
             xs={12}
             lg={12}
           >
-                <LabTabs/> 
+          <LabTabs/> 
           </Grid>
          
         </Grid>

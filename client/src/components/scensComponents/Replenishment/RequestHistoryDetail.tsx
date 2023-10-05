@@ -3,7 +3,7 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import { Grid, TextField } from '@material-ui/core';
 import Button from '../../Button';
 import { Form } from '../../useForm';
-import { STORE_QUERY, UPDATE_STORE_MUTATION } from '../../../graphql/Store';
+import { ACCEPT_STORE_PRODUCT_MUTATION } from '../../../graphql/Store';
 import { Alert } from '@mui/material';
 import Spinner from '../../Spinner';
 import { UserContext } from '../../auth/UserContext';
@@ -27,11 +27,11 @@ const GET_ORDER_QUERY = gql`
   }
 `;
 
-const OrderDetail = ({ id }: { id: number }) => {
+const RequestHistoryDetail = ({ id }: { id: number }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const {currentUser} = useContext(UserContext);
-  const [updateStore] = useMutation(UPDATE_STORE_MUTATION, {
+  const [updateStore] = useMutation(ACCEPT_STORE_PRODUCT_MUTATION, {
     refetchQueries: [{ query: ORDER_QUERY }],
   });
 
@@ -158,4 +158,4 @@ if(!currentUser){
   );
 };
 
-export default OrderDetail;
+export default RequestHistoryDetail;

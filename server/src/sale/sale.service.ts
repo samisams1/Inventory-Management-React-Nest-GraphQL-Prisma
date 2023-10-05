@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaClient, Sale, SaleDetail } from '@prisma/client';
+import { PrismaClient, Sale, SaleDetail, Store } from '@prisma/client';
 import { saleDetail } from 'src/sale-detail/sale-detail.entity';
+import { UpdateStoreInput } from 'src/store/Dto/update-store-input';
 import { CreateSaleInput } from './Dto/sale-create-input';
 @Injectable()
 export class SaleService {
@@ -90,6 +91,34 @@ export class SaleService {
         }
       
         return sale;
+      }
+      async acceptProductFromSale(input: UpdateStoreInput[]): Promise<Store[]> {
+        const updatedShopess: Store[] = [];
+        for (const updateInput of input) {
+          const { orderId, products } = updateInput;
+      
+          for (const productInput of products) {
+            const { productId, quantity } = productInput;
+      
+            // Get the product details
+            const product = await this.prisma.product.findUnique({
+              where: { id: productId },
+            });
+            const updatedShope = await this.prisma.shopeProduct.updateMany({
+              where: { productId: productId },
+              data: { quantity: { increment: quantity } },
+            });
+    
+            // Update the order status
+            const updatedOrder = await this.prisma.order.updateMany({
+              where: { id: orderId },
+              data: { status: "accepet" },
+            });
+         
+          }
+        }
+      
+        return updatedShopess;
       }
     async saleDetail() {
       const sales = await this.prisma.saleDetail.findMany({

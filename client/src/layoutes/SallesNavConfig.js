@@ -31,7 +31,7 @@ export const SallesNavConfig = [
   },
   {
     title: 'Request History',
-    path: 'order',
+    path: 'requestHistory',
     icon: getIcon('fluent-mdl2:review-request-solid'),
   },
   {
